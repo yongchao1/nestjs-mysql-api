@@ -44,10 +44,6 @@ export class LoginController {
     summary: '获取验证码',
     description: '获取验证码',
   })
-  @ApiCreatedResponse({
-    type: String,
-    description: '验证码'
-  })
   @Get('captcha')
   getCaptchaApi() {
     const captcha = svgCaptcha.create({

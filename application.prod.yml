@@ -7,7 +7,7 @@ tokenExpire: 7
 # 数据库配置
 datasource:
   driverName: mysql
-  host: localhost
+  host: 192.168.0.34
   port: 3306
   database: nestjs-mysql-api
   username: root
