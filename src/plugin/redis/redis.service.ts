@@ -1,13 +1,25 @@
 import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
 import Redis, { ClientContext, Result } from 'ioredis';
 
 import { ObjectType } from '@src/types';
 import { isObject } from '@src/utils';
 
+// TypeOrmModule.forRootAsync({
+//   imports: [ConfigModule],
+//   inject: [ConfigService],
+//   useFactory: (configService: ConfigService) => ({
+//     type: 'mysql',
+//     host: String(configService.get('datasource.host')),
+//     port: Number.parseInt(configService.get('datasource.port') ?? '3306'),
+//     username: String(configService.get('datasource.username')),
+//     password: String(configService.get('datasource.password')),
+//     database: String(configService.get('datasource.database')),
+
 @Injectable()
 export class RedisService {
+  constructor(private readonly configService: ConfigService) {}
   public redisClient!: Redis;
-
   // 模块加载的时候就缓存创建redis句柄
   onModuleInit() {
     if (!this.redisClient) {
@@ -17,11 +29,11 @@ export class RedisService {
 
   private getClient() {
     this.redisClient = new Redis({
-      port: 6379, // Redis port
-      host: '192.168.0.34', // redisDb Redis host
-      username: '', // needs Redis >= 6
-      password: '', // 密码
-      db: 0, // redis是几个数据库的，使用第一个
+      port: this.configService.get('redis.port'), // Redis port
+      host: this.configService.get('redis.host'), // redisDb Redis host
+      username: this.configService.get('redis.username'), // needs Redis >= 6
+      password: this.configService.get('redis.password'), // 密码
+      db: this.configService.get('redis.db'), // redis是几个数据库的，使用第一个
     });
   }
 

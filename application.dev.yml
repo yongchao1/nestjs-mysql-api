@@ -21,6 +21,13 @@ datasource:
   loc: Asia/Shanghai
   logging: true
 
+redis:
+   port: 6379
+   host: 192.168.0.34
+   username: ''
+   password: ''
+   db: 0
+
 # 腾讯地图api
 lbsKey: LW7BZ-NB7C5--QNDSX-VCZVT-D7FQ4
 
