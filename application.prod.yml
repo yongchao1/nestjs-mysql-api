@@ -1,8 +1,14 @@
 PORT: 9000
 PREFIX: api
 
+# 正常token2小时
+tokenExpire: 2
+
 # token过期时间为7天
 tokenExpire: 7
+
+# 默认密码
+defaultPassword: 123456
 
 # 数据库配置
 datasource:
@@ -35,3 +41,5 @@ aliyunOss:
   bucketName: 'an-jia-shop'
   imgDefaultSize: 5
   supportImgTypes: ['.png', '.jpg', '.gif', '.jpeg']
+
+
