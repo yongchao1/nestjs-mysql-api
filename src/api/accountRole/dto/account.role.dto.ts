@@ -1,11 +1,14 @@
 import { Type } from 'class-transformer';
 import { IsArray, IsInt, IsNotEmpty, Min } from 'class-validator';
+import { ApiProperty } from '@nestjs/swagger';
+
 
 export class AccountRoleDto {
   @Min(1, { message: '账号id最小值为1' })
   @IsInt({ message: '账号id必须是整数' })
   @Type(() => Number)
   @IsNotEmpty({ message: '账号id不能为空' })
+  @ApiProperty({ description: '账号id' })
   accountId!: number;
 
   @Type(() => Number)

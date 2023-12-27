@@ -12,7 +12,7 @@ defaultPassword: 123456
 # 数据库配置
 datasource:
   driverName: mysql
-  host: localhost
+  host: 192.168.0.34
   port: 3306
   database: nestjs-mysql-api
   username: root
@@ -20,6 +20,13 @@ datasource:
   charset: utf8mb4
   loc: Asia/Shanghai
   logging: true
+
+redis:
+   port: 6379
+   host: 192.168.0.34
+   username: ''
+   password: ''
+   db: 0
 
 # 腾讯地图api
 lbsKey: LW7BZ-NB7C5--QNDSX-VCZVT-D7FQ4

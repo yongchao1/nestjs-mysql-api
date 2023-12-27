@@ -5,10 +5,20 @@ import { LoginVo } from './vo/login.vo';
 import * as svgCaptcha from 'svg-captcha';
 import { HttpException } from '@nestjs/common/exceptions';
 import { HttpStatus } from '@nestjs/common/enums';
+import { ApiTags, ApiOperation, ApiCreatedResponse, ApiBearerAuth } from '@nestjs/swagger';
 @Controller()
 export class LoginController {
   constructor(private readonly loginService: LoginService) {}
 
+  @ApiTags('后台管理系统')
+  @ApiOperation({
+    summary: '用户登录',
+    description: '用户名可以是手机号码、邮箱、用户名',
+  })
+  @ApiCreatedResponse({
+    type: LoginDto,
+    description: '用户登录返回值'
+  })
   @Post('login')
   async loginApi(@Body() req: LoginDto): Promise<LoginVo> {
     if (req.captcha.toLowerCase() === req.codeText.toLowerCase()) {
@@ -18,11 +28,22 @@ export class LoginController {
     }
   }
 
+  @ApiTags('后台管理系统')
+  @ApiOperation({
+    summary: '刷新token',
+    description: '刷新token',
+  })
+  @ApiBearerAuth()
   @Get('refresh')
   async refreshTokenApi(@Query('token') token: string): Promise<LoginVo> {
     return await this.loginService.refreshTokenApi(token);
   }
 
+  @ApiTags('后台管理系统')
+  @ApiOperation({
+    summary: '获取验证码',
+    description: '获取验证码',
+  })
   @Get('captcha')
   getCaptchaApi() {
     const captcha = svgCaptcha.create({
